@@ -1,0 +1,9 @@
+INVOICE #INV-2026-4100
+Invoice Date: October 12, 2026
+Billed To: Example Organization
+Vendor: CloudTools Inc.
+
+Description:
+Annual Developer Platform Subscription Renewal (1 Year)
+Billing Period: Oct 12, 2026 - Oct 11, 2027
+Total Due: $240.00 USD

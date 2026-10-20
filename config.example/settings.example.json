@@ -1,0 +1,92 @@
+{
+  "ollama": {
+    "host": "http://127.0.0.1:11434",
+    "model": "gemma4:26b",
+    "temperature": 0.1,
+    "think": false,
+    "timeout_seconds": 120
+  },
+  "features": {
+    "enable_direct_text": true,
+    "enable_tagging": true,
+    "naming_style": "date_title_case",
+    "title_language": "English"
+  },
+  "limits": {
+    "max_text_bytes": 131072,
+    "max_text_chars": 32000,
+    "max_image_bytes": 52428800,
+    "min_pdf_text_chars": 40,
+    "max_pdf_text_pages": 20,
+    "max_pdf_vision_pages": 2,
+    "pdf_vision_dpi": 150,
+    "max_spreadsheet_sheets": 8,
+    "max_spreadsheet_rows_per_sheet": 100,
+    "max_epub_chapters": 12,
+    "max_filename_stem_chars": 180
+  },
+  "extensions": {
+    "supported_images": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".gif"
+    ],
+    "pdf": [
+      ".pdf"
+    ],
+    "word_and_richtext": [
+      ".docx",
+      ".doc",
+      ".rtf",
+      ".odt"
+    ],
+    "spreadsheets": [
+      ".xlsx",
+      ".ods"
+    ],
+    "presentations": [
+      ".pptx",
+      ".odp"
+    ],
+    "ebooks": [
+      ".epub"
+    ],
+    "unsupported_binaries": [
+      ".pages",
+      ".numbers",
+      ".key",
+      ".xls",
+      ".ppt",
+      ".zip",
+      ".tar",
+      ".gz",
+      ".tgz",
+      ".bz2",
+      ".xz",
+      ".7z",
+      ".rar",
+      ".dmg",
+      ".iso",
+      ".pkg",
+      ".app",
+      ".mp3",
+      ".mp4",
+      ".m4a",
+      ".mov",
+      ".avi",
+      ".mkv",
+      ".wav",
+      ".flac",
+      ".heic",
+      ".heif",
+      ".sqlite",
+      ".db",
+      ".pyc",
+      ".o",
+      ".dylib",
+      ".so"
+    ]
+  }
+}
