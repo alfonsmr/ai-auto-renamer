@@ -256,20 +256,20 @@ All user-configurable settings are stored outside the Python script in three fil
 #### 3. `"limits"` — Extraction Caps & Performance Tuning
 ```json
 "limits": {
-  "max_text_bytes": 131072,
-  "max_text_chars": 32000,
+  "max_text_bytes": 262144,
+  "max_text_chars": 48000,
   "max_image_bytes": 52428800,
-  "min_pdf_text_chars": 40,
-  "max_pdf_text_pages": 20,
-  "max_pdf_vision_pages": 2,
-  "pdf_vision_dpi": 150,
-  "max_spreadsheet_sheets": 8,
+  "min_pdf_text_chars": 65,
+  "max_pdf_text_pages": 35,
+  "max_pdf_vision_pages": 4,
+  "pdf_vision_dpi": 200,
+  "max_spreadsheet_sheets": 12,
   "max_spreadsheet_rows_per_sheet": 100,
-  "max_epub_chapters": 12,
+  "max_epub_chapters": 24,
   "max_filename_stem_chars": 180
 }
 ```
-The defaults sample the front matter of large documents (first 20 PDF pages, first 8 sheets, first 12 EPUB chapters, up to 32,000 characters), keeping inference fast and memory usage low.
+The defaults sample the front matter of large documents (first 35 PDF pages, first 12 sheets, first 24 EPUB chapters, up to 48,000 characters), keeping inference fast and memory usage low.
 
 #### 4. `"extensions"` — Enabling or Disabling Document Types
 Contains extension lists for `"supported_images"`, `"pdf"`, `"word_and_richtext"`, `"spreadsheets"`, `"presentations"`, `"ebooks"`, and `"unsupported_binaries"`. Set any category list to `[]` to disable processing for that format.
