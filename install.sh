@@ -109,6 +109,93 @@ if [[ "${INSTALL_SERVICE}" == "true" ]]; then
   echo "• Synchronized Finder Tag Database & sidebar tags from: ${CONFIG_DIR}/tags.json"
 fi
 
+# 4. Run non-blocking preflight checks for Poppler, Ollama CLI, and configured model
+echo ""
+echo "--------------------------------------------------------------------"
+echo "  Preflight Environment Check"
+echo "--------------------------------------------------------------------"
+/usr/bin/python3 - "${CONFIG_DIR}/settings.json" <<'PY' || true
+from __future__ import annotations
+
+import json
+import os
+import pathlib
+import shutil
+import sys
+import urllib.error
+import urllib.request
+
+settings_path = pathlib.Path(sys.argv[1])
+host = os.environ.get("OLLAMA_HOST") or "http://127.0.0.1:11434"
+model = os.environ.get("OLLAMA_MODEL") or "gemma4:26b"
+
+if settings_path.is_file():
+    try:
+        data = json.loads(settings_path.read_text(encoding="utf-8"))
+        if isinstance(data, dict):
+            ollama_cfg = data.get("ollama")
+            if isinstance(ollama_cfg, dict):
+                host = str(os.environ.get("OLLAMA_HOST") or ollama_cfg.get("host") or host)
+                model = str(os.environ.get("OLLAMA_MODEL") or ollama_cfg.get("model") or model)
+    except Exception:
+        pass
+
+
+def find_bin(name: str, extra_paths: tuple[str, ...] = ()) -> str | None:
+    for candidate in (
+        f"/opt/homebrew/bin/{name}",
+        f"/usr/local/bin/{name}",
+        f"/usr/bin/{name}",
+        f"/bin/{name}",
+        *extra_paths,
+    ):
+        if os.path.isfile(candidate) and os.access(candidate, os.X_OK):
+            return candidate
+    return shutil.which(name)
+
+
+pdftotext_bin = find_bin("pdftotext")
+pdftoppm_bin = find_bin("pdftoppm")
+if pdftotext_bin and pdftoppm_bin:
+    print(f"• [OK]   Poppler PDF tools found ({pdftotext_bin})")
+else:
+    print("• [WARN] Poppler PDF tools (pdftotext / pdftoppm) not found.")
+    print("         Install for PDF support: brew install poppler")
+
+ollama_bin = find_bin("ollama", ("/Applications/Ollama.app/Contents/Resources/ollama",))
+if ollama_bin:
+    print(f"• [OK]   Ollama CLI found ({ollama_bin})")
+else:
+    print("• [WARN] Ollama CLI not found in PATH.")
+    print("         Install Ollama from: https://ollama.com/")
+
+tags_url = f"{host.rstrip('/')}/api/tags"
+opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+try:
+    with opener.open(tags_url, timeout=2) as resp:
+        payload = json.loads(resp.read().decode("utf-8"))
+    models_raw = payload.get("models", []) if isinstance(payload, dict) else []
+    installed_names: set[str] = set()
+    for entry in models_raw:
+        if isinstance(entry, dict):
+            for key in ("name", "model"):
+                val = entry.get(key)
+                if isinstance(val, str) and val:
+                    installed_names.add(val)
+                    if val.endswith(":latest"):
+                        installed_names.add(val[:-7])
+
+    print(f"• [OK]   Ollama server is running at {host}")
+    if model in installed_names:
+        print(f"• [OK]   Configured model '{model}' is pulled and ready")
+    else:
+        print(f"• [WARN] Configured model '{model}' is not pulled yet.")
+        print(f"         Run: ollama pull {model}")
+except Exception:
+    print(f"• [WARN] Ollama server is not reachable at {host}.")
+    print(f"         Start Ollama and ensure your model is pulled: ollama pull {model}")
+PY
+
 echo ""
 echo "===================================================================="
 echo "  Installation Complete!"

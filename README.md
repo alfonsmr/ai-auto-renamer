@@ -133,6 +133,7 @@ What `./install.sh` does:
 2. Generates the Automator Quick Action bundle (`./Smart Rename.workflow`) pointing to your local `smart_rename.py`.
 3. Installs the Quick Action into `~/Library/Services/Smart Rename.workflow`.
 4. Synchronizes your configured tags and colors into macOS Finder's Tag Database and sidebar.
+5. Runs a non-blocking preflight check verifying `poppler` (`pdftotext` / `pdftoppm`), the `ollama` CLI, local Ollama server reachability, and whether your configured model is pulled.
 
 ### Step 2: Enable the Quick Action in macOS Finder (One-Time macOS Requirement)
 > [!IMPORTANT]

@@ -5,44 +5,30 @@
 /Smart Rename.workflow/
 /Smart Rename & Tag.workflow/
 /Rename with Ollama.workflow/
-# Python cache & test artifacts
+
+# Python cache, virtual environments & test/typecheck artifacts
 __pycache__/
 *.py[cod]
 *$py.class
 .pytest_cache/
 .coverage
+.pyright/
+.mypy_cache/
+.ruff_cache/
+.venv/
+
 # macOS Finder metadata
 .DS_Store
 .AppleDouble
 .LSOverride
-# Local environment overrides
+
+# Local environment overrides & private material
 .env
-*.local.*
-# Local environment files
 .env.*
 !.env.example
-# Credentials and private material
+*.local.*
 secrets/
 private/
-token_responses/
 .secret
 *.key
 *.pem
-service-account*.json
-credentials*.json
-# Terraform working data and potentially sensitive files
-.terraform/
-*.tfstate
-*.tfstate.*
-*.tfvars
-*.tfvars.json
-*.tfplan
-tfplan
-backend.conf
-# Local security-evaluation state and results
-.promptfoo/
-tooling/promptfoo/.promptfoo/
-tooling/promptfoo/results/
-# Dependencies and caches
-.venv/
-node_modules/

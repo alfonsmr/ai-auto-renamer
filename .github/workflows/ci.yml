@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-typecheck:
+    name: macOS Unit Tests & Pyright
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install Poppler & Pyright
+        run: brew install poppler pyright
+
+      - name: Validate shell scripts
+        run: |
+          zsh -n install.sh
+          sh -n scripts/check-secrets.sh
+
+      - name: Run Pyright type checking
+        run: pyright --project pyrightconfig.json
+
+      - name: Run unit test suite
+        run: /usr/bin/python3 -m unittest discover -s tests -v

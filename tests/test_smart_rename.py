@@ -536,6 +536,10 @@ class TestRenameWithOllama(unittest.TestCase):
             check=True,
         )
         self.assertIn("Created default settings.json", proc1.stdout)
+        self.assertIn("Preflight Environment Check", proc1.stdout)
+        self.assertIn("Poppler PDF tools", proc1.stdout)
+        self.assertIn("Ollama CLI", proc1.stdout)
+        self.assertIn("Ollama server", proc1.stdout)
         self.assertTrue((target_cfg / "settings.json").is_file())
         self.assertTrue((target_cfg / "tags.json").is_file())
         self.assertTrue((target_cfg / "system_prompt.md").is_file())
