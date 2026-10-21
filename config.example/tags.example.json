@@ -53,7 +53,8 @@
     "reading-notes": "Summaries, highlights, reflections, or synthesis from reading.",
     "checklist": "Items intended to be checked during preparation, execution, or verification.",
     "template": "A reusable starting structure for producing future documents.",
-    "correspondence": "Letters, saved emails, notices, and written exchanges."
+    "correspondence": "Letters, saved emails, notices, and written exchanges.",
+    "article": "Written articles, blog posts, essays, newsletters, or editorial posts, whether drafted or saved."
   },
   "relationship_tags": {
     "received": "Reliably known to have been delivered directly to me by another party.",

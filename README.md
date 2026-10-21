@@ -69,17 +69,17 @@ While a filename identifies a *single* document, macOS Finder tags let you group
 ### Why a Controlled Vocabulary?
 When an LLM is allowed to invent tags freely, it creates **"tag sprawl"** — dozens of redundant variants (`bill`, `bills`, `billing`, `invoice`, `october-bill`) that clutter Finder's sidebar.
 
-To prevent this, **AI Auto Renamer** enforces a strict **controlled vocabulary** defined in [`config/tags.json`](config.example/tags.example.json) (50 starter tags out of the box), validated by both Ollama's JSON schema and Python's `validate_tags()` check:
+To prevent this, **AI Auto Renamer** enforces a strict **controlled vocabulary** defined in [`config/tags.json`](config.example/tags.example.json) (51 starter tags out of the box), validated by both Ollama's JSON schema and Python's `validate_tags()` check:
 - Every tag returned by the model must exist in `config/tags.json`.
 - Category ceilings (`<= 2` Context tags, `<= 2` Document-Type tags, `<= 5` total tags) are enforced before any file is modified.
 - Existing Finder tags already on a file are **always preserved**.
 
 ### The Domain At-a-Glance Color Schema
-In Finder List and Icon views, macOS displays **up to 3 colored dots** next to a filename. If all 50 tags had colors, every file would display a confusing rainbow of dots.
+In Finder List and Icon views, macOS displays **up to 3 colored dots** next to a filename. If all 51 tags had colors, every file would display a confusing rainbow of dots.
 
 Instead, this project separates **colored domain tags** from **colorless document-type tags**:
 - **Context tags (17 starter tags) have Finder colors:** They show at a glance which area of life or work a file belongs to.
-- **Document-Type tags (30 starter tags) and Relationship tags (3 starter tags) are colorless:** They add zero dot clutter next to filenames, while remaining 100% searchable in Finder and Spotlight (`tag:invoice`, `tag:contract`, `tag:specification`).
+- **Document-Type tags (31 starter tags) and Relationship tags (3 starter tags) are colorless:** They add zero dot clutter next to filenames, while remaining 100% searchable in Finder and Spotlight (`tag:invoice`, `tag:contract`, `tag:specification`).
 
 | Finder Color Dot | Assigned Context Tags | Visual Meaning in Finder |
 | :--- | :--- | :--- |
@@ -90,7 +90,7 @@ Instead, this project separates **colored domain tags** from **colorless documen
 | 🟠 **Orange** | `business`, `career`, `publishing` | **Work, Clients, Career & Publishing** |
 | 🟡 **Yellow** | `learning`, `music`, `personal-development` | **Learning, Study & Personal Growth** |
 | ⚪️ **Gray** | `home`, `family`, `travel` | **Household, Family & Travel** |
-| ○ **No Color** | All 30 Document-Type & 3 Relationship tags | **Searchable by document type without dot clutter** |
+| ○ **No Color** | All 31 Document-Type & 3 Relationship tags | **Searchable by document type without dot clutter** |
 
 #### Example in Finder:
 ```text
@@ -285,7 +285,7 @@ When `smart_rename.py` runs, it reads `config/tags.json` and automatically:
 
 #### 1. The Three Tag Categories
 - **`"context_tags"` (17 starter tags):** High-level life, work, or subject domains (`finance`, `tax`, `legal`, `medical`, `personal-admin`, `career`, `business`, `learning`, `technology`, `project-management`, `publishing`, `home`, `family`, `travel`, `music`, `personal-development`, `subscriptions`).
-- **`"document_type_tags"` (30 starter tags):** What kind of artifact the file is (`invoice`, `receipt`, `statement`, `budget`, `contract`, `policy`, `form`, `identity-document`, `certificate`, `booking`, `warranty`, `cv`, `proposal`, `plan`, `meeting-notes`, `transcript`, `interview`, `webinar`, `presentation`, `report`, `research`, `comparison`, `specification`, `architecture`, `guide`, `course-material`, `reading-notes`, `checklist`, `template`, `correspondence`).
+- **`"document_type_tags"` (31 starter tags):** What kind of artifact the file is (`invoice`, `receipt`, `statement`, `budget`, `contract`, `policy`, `form`, `identity-document`, `certificate`, `booking`, `warranty`, `cv`, `proposal`, `plan`, `meeting-notes`, `transcript`, `interview`, `webinar`, `presentation`, `report`, `research`, `comparison`, `specification`, `architecture`, `guide`, `course-material`, `reading-notes`, `checklist`, `template`, `correspondence`, `article`).
 - **`"relationship_tags"` (3 starter tags — `received`, `sent`, `self-created`):** Custody provenance tags. To prevent guessing, Python only allows these tags when you explicitly pass `--provenance <tag>` on the command line.
 
 #### 2. Adding or Removing Tags

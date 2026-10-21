@@ -58,9 +58,9 @@ class TestRenameWithOllama(unittest.TestCase):
 
     def test_vocabulary_counts_and_definitions_in_prompt(self) -> None:
         self.assertEqual(len(rwo.CONTEXT_TAGS), 17)
-        self.assertEqual(len(rwo.DOCUMENT_TYPE_TAGS), 30)
+        self.assertEqual(len(rwo.DOCUMENT_TYPE_TAGS), 31)
         self.assertEqual(len(rwo.RELATIONSHIP_TAGS), 3)
-        self.assertEqual(len(rwo.ALL_APPROVED_TAGS), 50)
+        self.assertEqual(len(rwo.ALL_APPROVED_TAGS), 51)
         for tag in rwo.ALL_APPROVED_TAGS:
             self.assertIn(f"- {tag} — ", rwo.SYSTEM_PROMPT)
 
