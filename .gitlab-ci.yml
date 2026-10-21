@@ -36,6 +36,7 @@ typecheck-and-syntax:
   script:
     - sh -n scripts/check-secrets.sh
     - python3 -m py_compile smart_rename.py tests/test_smart_rename.py
+    - apt-get update && apt-get install -y --no-install-recommends libatomic1 && rm -rf /var/lib/apt/lists/*
     - pip install --no-cache-dir pyright
     - pyright --project pyrightconfig.json
   allow_failure: false
