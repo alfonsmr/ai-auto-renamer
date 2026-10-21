@@ -1,0 +1,9 @@
+{
+  "typeCheckingMode": "standard",
+  "pythonVersion": "3.9",
+  "pythonPlatform": "Darwin",
+  "include": [
+    "smart_rename.py",
+    "tests"
+  ]
+}
