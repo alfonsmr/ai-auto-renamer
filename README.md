@@ -19,6 +19,7 @@ Everything runs **100% locally on your Mac** — no cloud APIs, no external Pyth
    - [7.2 `config/tags.json` — Tag Vocabulary, Limits & Finder Colors](#72-configtagsjson--tag-vocabulary-limits--finder-colors)
    - [7.3 `config/system_prompt.md` — AI Instructions & Prompt Template](#73-configsystem_promptmd--ai-instructions--prompt-template)
 8. [Verification & Testing](#8-verification--testing)
+9. [License](#9-license)
 
 ---
 
@@ -363,3 +364,10 @@ cp examples/sample_* /tmp/ollama-test/
 open /tmp/ollama-test
 ```
 Right-click the copied files in `/tmp/ollama-test` and select **Quick Actions → Smart Rename** to see them renamed and tagged in Finder.
+
+---
+
+## 9. License
+
+This project is licensed under the **MIT License** — see the [`LICENSE`](LICENSE) file for details.
+
